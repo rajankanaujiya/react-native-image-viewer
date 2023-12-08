@@ -79,7 +79,7 @@ export default class ImageViewer extends React.Component<Props, State> {
    * props 有变化时执行
    */
   public init(nextProps: Props) {
-    if (nextProps.imageUrls.length === 0) {
+    if (nextProps.imageUrls?.length === 0) {
       // 隐藏时候清空
       this.fadeAnim.setValue(0);
       return this.setState(new State());
@@ -222,7 +222,7 @@ export default class ImageViewer extends React.Component<Props, State> {
    * 预加载图片
    */
   public preloadImage = (index: number) => {
-    if (index < this.state.imageSizes!.length) {
+    if (index < this.state.imageSizes!?.length) {
       this.loadImage(index + 1);
     }
   };
@@ -236,7 +236,7 @@ export default class ImageViewer extends React.Component<Props, State> {
     const offsetXRTL = !I18nManager.isRTL ? offsetX : -offsetX;
 
     if (offsetXRTL < 0) {
-      if (this!.state!.currentShowIndex || 0 < this.props.imageUrls.length - 1) {
+      if (this!.state!.currentShowIndex || 0 < this.props.imageUrls?.length - 1) {
         this.loadImage((this!.state!.currentShowIndex || 0) + 1);
       }
     } else if (offsetXRTL > 0) {
@@ -270,7 +270,7 @@ export default class ImageViewer extends React.Component<Props, State> {
     } else if (vxRTL < -0.7) {
       // 下一张
       this.goNext.call(this);
-      if (this.state.currentShowIndex || 0 < this.props.imageUrls.length - 1) {
+      if (this.state.currentShowIndex || 0 < this.props.imageUrls?.length - 1) {
         this.loadImage((this.state.currentShowIndex || 0) + 1);
       }
       return;
@@ -328,7 +328,7 @@ export default class ImageViewer extends React.Component<Props, State> {
    * 到下一张
    */
   public goNext = () => {
-    if (this.state.currentShowIndex === this.props.imageUrls.length - 1) {
+    if (this.state.currentShowIndex === this.props.imageUrls?.length - 1) {
       // 回到之前的位置
       this.resetPosition.call(this);
       return;
@@ -607,12 +607,12 @@ export default class ImageViewer extends React.Component<Props, State> {
             style={{
               ...this.styles.moveBox,
               transform: [{ translateX: this.positionX }],
-              width: this.width * this.props.imageUrls.length
+              width: this.width * this.props.imageUrls?.length
             }}
           >
             {ImageElements}
           </Animated.View>
-          {this!.props!.renderIndicator!((this.state.currentShowIndex || 0) + 1, this.props.imageUrls.length)}
+          {this!.props!.renderIndicator!((this.state.currentShowIndex || 0) + 1, this.props.imageUrls?.length)}
 
           {this.props.imageUrls[this.state.currentShowIndex || 0] &&
             this.props.imageUrls[this.state.currentShowIndex || 0].originSizeKb &&
